@@ -20,5 +20,24 @@ public class Sort {
     public static void selectionSort(List<String> list, boolean isAscending) {
         // TODO: Implement selection sort.
         // Tip: Try a version without ordering first.
+
+        for (int n = 0; n < list.size(); n++) {
+            // step 1: find smallest/largest element depending on order
+            int minMax = n;
+            for(int i = n; i < list.size(); i++) {
+                if (isAscending && list.get(i).compareTo(list.get(minMax)) < 0) {
+                    minMax = i;
+                }
+
+                if (!isAscending && list.get(i).compareTo(list.get(minMax)) > 0) {
+                    minMax = i;
+                }
+            }
+
+            // step 2: swap with first element
+            String tmp = list.get(minMax);
+            list.set(minMax, list.get(n));
+            list.set(n, tmp);
+        }
     }
 }
