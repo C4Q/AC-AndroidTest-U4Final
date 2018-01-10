@@ -6,10 +6,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -28,16 +31,16 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final String TAG = "MainActivity";
     private ColorAdapter adapter;
-    protected HashMap<String, String> colorDict;
-    protected List<String> colorsList;
+    protected HashMap<String, String> colorDict = new HashMap<>();
+    protected List<String> colorsList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        colorDict = new HashMap<>();
         colorDict.put("indigo", "#4b0082");
         colorDict.put("green", "#00ff00");
         colorDict.put("blue", "#0000ff");
@@ -47,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         DataDownloader dd = new DataDownloader();
         dd.execute("https://raw.githubusercontent.com/operable/cog/master/priv/css-color-names.json");
 
-        colorsList = new ArrayList<>();
         String[] names = new String[] {"blue", "red", "purple", "indigo", "orange", "brown", "black", "green"};
         for(String n: names) colorsList.add(n);
 
@@ -93,12 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected String doInBackground(String... urls) {
-            try {
                 return downloadData(urls[0]);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return "";
         }
 
         @Override
@@ -111,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        private String downloadData(String urlString) throws IOException {
+        private String downloadData(String urlString) {
             InputStream is = null;
             try {
                 URL url = new URL(urlString);
@@ -127,9 +124,16 @@ public class MainActivity extends AppCompatActivity {
                     total.append(line);
                 }
                 return new String(total);
+            } catch (Exception e) {
+                Log.d(TAG, "Error downloading from the internet: " + e.getMessage());
+                return "{}"; // empty json
             } finally {
                 if (is != null) {
-                    is.close();
+                    try {
+                        is.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                 }
             }
         }
