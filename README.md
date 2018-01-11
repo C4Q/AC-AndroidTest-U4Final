@@ -1,4 +1,22 @@
-# Android App Unit 4 Final Test
+# Android App Unit 4 Final Test **Solution**
+
+## The Solution App
+
+To get the solution code, run the code below
+
+```
+git clone https://github.com/C4Q/AC-AndroidTest-U4Final.git
+git checkout sol
+```
+
+The test `MainActivityTest.clickOnNameShowsToastWithoutHardCodedMessage()` is flaky.
+By flaky, it passes for some people and fails for others even when they have the correct implementation.
+It has nothing to do with the code, but with the test framework and the fact that Toast messages "out-live" their activities.
+Failing this test would not affect your grade.
+
+
+The rest of the original test information is below
+--------------------------------------------------
 
 ## To get started,
 
@@ -114,3 +132,5 @@ You may not *modify* the test code.
    git checkout master
    git reset --hard <commit-hash>
    ```
+
+
