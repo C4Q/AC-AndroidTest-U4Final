@@ -1,16 +1,21 @@
 package nyc.c4q.androidtest_unit4final;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-
     private ColorAdapter adapter;
     protected HashMap<String, String> colorDict;
     protected List<String> colorsList;
@@ -19,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         colorDict = new HashMap<>();
         colorDict.put("indigo", "#4b0082");
@@ -29,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
         // https://raw.githubusercontent.com/operable/cog/master/priv/css-color-names.json
 
         colorsList = new ArrayList<>();
-        String[] names = new String[] {"blue", "red", "purple", "indigo", "orange", "brown", "black", "green"};
-        for(String n: names) colorsList.add(n);
+        String[] names = new String[]{"blue", "red", "purple", "indigo", "orange", "brown", "black", "green"};
+        for (String n : names) colorsList.add(n);
 
         RecyclerView recyclerView = findViewById(R.id.rv);
         adapter = new ColorAdapter(colorsList, colorDict);
