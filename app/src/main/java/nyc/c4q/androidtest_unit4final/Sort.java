@@ -1,6 +1,8 @@
 package nyc.c4q.androidtest_unit4final;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,6 +12,7 @@ import java.util.List;
  */
 
 public class Sort {
+    static Context context;
 
     /**
      * Sorts a list using the selection sort algorithm.
@@ -22,7 +25,6 @@ public class Sort {
      * @param isAscending
      */
     public static void selectionSort(List<String> list, boolean isAscending) {
-        isAscending = true;
         String temp;
         if (list.size() > 1) {
             for (int x = 0; x < list.size(); x++) {

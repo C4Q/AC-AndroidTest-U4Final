@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
         String[] names = new String[]{"blue", "red", "purple", "indigo", "orange", "brown", "black", "green"};
         for (String n : names) colorsList.add(n);
 
-        Sort.selectionSort(colorsList,true);
+        Sort.selectionSort(colorsList,false);
 
         RecyclerView recyclerView = findViewById(R.id.rv);
         adapter = new ColorAdapter(colorsList, colorDict);
